@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Pulsar-LineageOS for POCO F3 / alioth (sm8250)
+
+    Pins:
+      - our LinDroid kernel (replaces LineageOS kernel)
+      - LinDroid repos (vendor_lindroid, vendor_extra, external_lxc, libhybris)
+
+    Usage: copy to $ROM_DIR/.repo/local_manifests/ before `repo sync`
+-->
+<manifest>
+  <remote name="pulsar" fetch="https://github.com/otaviomorais" />
+  <remote name="lindroid" fetch="https://github.com/Linux-on-droid" />
+
+  <remove-project name="LineageOS/android_kernel_xiaomi_sm8250" />
+
+  <project path="kernel/xiaomi/sm8250"
+           name="kernel_xiaomi_sm8250"
+           remote="pulsar"
+           revision="master" />
+
+  <project path="vendor/lindroid"
+           name="vendor_lindroid"
+           remote="lindroid"
+           revision="lindroid-22.1" />
+
+  <project path="vendor/extra"
+           name="vendor_extra"
+           remote="lindroid"
+           revision="lindroid-21" />
+
+  <project path="external/lxc"
+           name="external_lxc"
+           remote="lindroid"
+           revision="lindroid-21" />
+
+  <project path="external/libhybris"
+           name="libhybris"
+           remote="lindroid"
+           revision="lindroid-21" />
+</manifest>

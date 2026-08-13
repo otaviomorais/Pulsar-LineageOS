@@ -1,0 +1,47 @@
+name: build-rom
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch do LineageOS
+        required: false
+        default: lineage-22.1
+      clean:
+        description: Apagar build dir antes (limpo)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: [self-hosted, linux, x86_64]
+    timeout-minutes: 720
+    steps:
+      - name: Checkout orquestracao
+        uses: actions/checkout@v4
+
+      - name: Setup
+        run: |
+          if [ "${{ inputs.clean }}" = "true" ]; then
+            rm -rf "$RUNNER_WORKSPACE/../../rom/lineage-lindroid"
+          fi
+          mkdir -p "$RUNNER_WORKSPACE/../../rom"
+
+      - name: Build ROM
+        env:
+          LINEAGE_BRANCH: ${{ inputs.branch }}
+        run: |
+          ./build.sh "$RUNNER_WORKSPACE/../../rom/lineage-lindroid"
+
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lineage-lindroid-alioth
+          path: |
+            ${{ runner.workspace }}/../../rom/lineage-lindroid/out/target/product/alioth/*.zip
+            ${{ runner.workspace }}/../../rom/lineage-lindroid/out/target/product/alioth/*.img
+          if-no-files-found: ignore

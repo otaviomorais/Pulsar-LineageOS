@@ -1,0 +1,28 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pulsar <pulsar@pulsar-kernel.dev>
+Date: Thu, 13 Aug 2026 00:00:00 +0000
+Subject: [PATCH] alioth: inherit lindroid product
+
+Enables the LinDroid vendor package (app, daemon, lxc tools,
+libhybris compatibility layers) in the LineageOS build.
+
+Change-Id: I0000000000000000000000000000000000000000
+---
+ device.mk | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/device.mk b/device.mk
+index 0000000..0000000 100644
+--- a/device.mk
++++ b/device.mk
+@@ -42,4 +42,7 @@
+     $(LOCAL_PATH)
+ 
+ # Inherit from vendor blobs
+ $(call inherit-product, vendor/xiaomi/alioth/alioth-vendor.mk)
++
++# LinDroid
++$(call inherit-product, vendor/lindroid/lindroid.mk)
+
+-- 
+2.46.0
