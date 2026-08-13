@@ -12,8 +12,6 @@
   <remote name="pulsar" fetch="https://github.com/otaviomorais" />
   <remote name="lindroid" fetch="https://github.com/Linux-on-droid" />
 
-  <remove-project name="LineageOS/android_kernel_xiaomi_sm8250" />
-
   <project path="kernel/xiaomi/sm8250"
            name="kernel_xiaomi_sm8250"
            remote="pulsar"
